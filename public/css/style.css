@@ -1,0 +1,60 @@
+@import url(header.css);
+@import url(footer.css);
+@import url(pacman-game.css);
+
+*{
+    font-family: 'Roboto', sans-serif;
+    /* font-family: 'Roboto Thin', sans-serif;
+    font-family: 'Roboto Light', sans-serif;
+    font-family: 'Roboto Medium', sans-serif;
+    font-family: 'Roboto Black', sans-serif; */
+    --yellow: #ffcf00;
+}
+
+body{
+    background-color: #000;
+}
+
+h1{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    color: var(--yellow);
+    font-size: 3rem;
+    padding-top: 1rem;
+}
+
+.menu{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    
+}
+.submenu{
+    border: solid 1px var(--yellow);
+    list-style-type: none;
+    text-align: center;
+    margin: 1rem;
+}
+a{
+    color: var(--yellow);
+    text-decoration: none;
+    font-size: 2rem;
+    margin: 1rem;
+}
+.sound{
+    border: none;
+}
+
+.hidden{
+    display: none;
+}
+
+i{  
+    color: #ffcf00;
+    font-size: 2rem;
+    list-style-type: none;
+    text-align: center;
+    margin: 1rem;
+    cursor: pointer;
+}

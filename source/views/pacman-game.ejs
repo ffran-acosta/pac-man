@@ -1,0 +1,37 @@
+<%- include('./partials/head.ejs')%> 
+
+<body>
+    
+    <%- include("./partials/header.ejs")  %>
+
+    <section class="box">
+        <div class="grid"></div>
+    </section>
+
+    <section id="options">
+        <i id="play" class="hidden fa-solid fa-play"></i>
+        <i id="pause" class="fa-solid fa-pause"></i>
+        <i class="fa-solid fa-arrow-rotate-left"></i>
+        <i id="volume" class="fa-solid fa-volume-high"></i>
+        <i id="mute" class="hidden fa-solid fa-volume-xmark"></i>
+        <section class="score">
+            <h3>Score: <span id="score">0</span></h3>
+        </section>
+    </section>
+
+    <section id="bottom">
+        
+        <section id="back">
+            <a class="back" href="/pacman"><i class="fa-solid fa-arrow-left"></i></a>
+        </section>  
+            
+
+
+    </section>
+
+
+
+    <script src="/scripts/buttons.js"></script>
+    <script src="/scripts/pacman.js"></script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+.logo{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+.logo img{
+    display: flex;
+    width: 30%;
+    max-width: 200px;
+    justify-content: center;
+}
+
+.pacman{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+
+.pacman img{
+    display: flex;
+    width: 50%;
+    max-width: 300px; 
+    max-height: 50px;
+    justify-content: center;
+}
