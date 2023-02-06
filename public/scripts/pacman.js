@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-
+  
   //SOUNDS
   const startAudio = new Audio('../sounds/start.mp3')
   const wakaWakaAudio = new Audio('../sounds/waka-waka.mp3')
@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
     1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
     1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
   ]
-
+  
   //CREATE BOARD
   const squares = []
   const createBoard = () => {
@@ -83,7 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
   //DRAW PAC-MAN INTO THE BOARD
   let pacmanCurrentIndex = 490
   squares[pacmanCurrentIndex].classList.add('pac-man')
-
+  
   //MOVE PAC-MAN
   const movePacman = (e) => {
     squares[pacmanCurrentIndex].classList.remove('pac-man')   
@@ -94,62 +94,62 @@ document.addEventListener('DOMContentLoaded', () => {
           pacmanCurrentIndex % width !== 0
           && !squares[pacmanCurrentIndex -1].classList.contains('wall') 
           && !squares[pacmanCurrentIndex -1].classList.contains('ghost-lair')
-        ) { pacmanCurrentIndex -= 1 }
-
-        if (squares[pacmanCurrentIndex -1] === squares[363]) {
-          pacmanCurrentIndex = 391
+          ) { pacmanCurrentIndex -= 1 }
+          
+          if (squares[pacmanCurrentIndex -1] === squares[363]) {
+            pacmanCurrentIndex = 391
         }
         break
-
-      //UP-ARROW
-      case 38:
-        if(
-          pacmanCurrentIndex - width >= 0 
-          && !squares[pacmanCurrentIndex -width].classList.contains('wall')
-          && !squares[pacmanCurrentIndex -width].classList.contains('ghost-lair')
-        ) { pacmanCurrentIndex -= width }
-        break
-
-      //RIGHT-ARROW
-      case 39:
+        
+        //UP-ARROW
+        case 38:
+          if(
+            pacmanCurrentIndex - width >= 0 
+            && !squares[pacmanCurrentIndex -width].classList.contains('wall')
+            && !squares[pacmanCurrentIndex -width].classList.contains('ghost-lair')
+            ) { pacmanCurrentIndex -= width }
+            break
+            
+            //RIGHT-ARROW
+            case 39:
         if(
           pacmanCurrentIndex % width < width - 1 
           && !squares[pacmanCurrentIndex +1].classList.contains('wall') 
           && !squares[pacmanCurrentIndex +1].classList.contains('ghost-lair')
-        ) { pacmanCurrentIndex += 1 }
-
-        if (squares[pacmanCurrentIndex +1] === squares[392]) {
+          ) { pacmanCurrentIndex += 1 }
+          
+          if (squares[pacmanCurrentIndex +1] === squares[392]) {
           pacmanCurrentIndex = 364
         }
         break
 
-      //DOWN-ARROW
-      case 40:
-        if (
-          pacmanCurrentIndex + width < width * width 
-          && !squares[pacmanCurrentIndex +width].classList.contains('wall') 
-          && !squares[pacmanCurrentIndex +width].classList.contains('ghost-lair')
-        ) { pacmanCurrentIndex += width }
-        break
-    }
-    squares[pacmanCurrentIndex].classList.add('pac-man')
-    pacDotEaten()
-    powerPelletEaten()
-    checkForGameOver()
-    checkForWin()
-  }
-  document.addEventListener('keyup', movePacman)
-
-  //EAT A PAC-DOT
-  const pacDotEaten = () => {
-    if (squares[pacmanCurrentIndex].classList.contains('pac-dot')) {
-      score++
-      scoreDisplay.innerHTML = score
+        //DOWN-ARROW
+        case 40:
+          if (
+            pacmanCurrentIndex + width < width * width 
+            && !squares[pacmanCurrentIndex +width].classList.contains('wall') 
+            && !squares[pacmanCurrentIndex +width].classList.contains('ghost-lair')
+            ) { pacmanCurrentIndex += width }
+            break
+          }
+          squares[pacmanCurrentIndex].classList.add('pac-man')
+          pacDotEaten()
+          powerPelletEaten()
+          checkForGameOver()
+          checkForWin()
+        }
+        document.addEventListener('keyup', movePacman)
+        
+        //EAT A PAC-DOT
+        const pacDotEaten = () => {
+          if (squares[pacmanCurrentIndex].classList.contains('pac-dot')) {
+            score++
+            scoreDisplay.innerHTML = score
       squares[pacmanCurrentIndex].classList.remove('pac-dot')
       wakaWakaAudio.play()
     }
   }
-
+  
   //EAT POWER PELLET
   const powerPelletEaten = () => {
     if (squares[pacmanCurrentIndex].classList.contains('power-pellet')) {
@@ -160,12 +160,12 @@ document.addEventListener('DOMContentLoaded', () => {
       squares[pacmanCurrentIndex].classList.remove('power-pellet')
     }
   }
-
+  
   //GHOST SCARED RESET
   const unScareGhosts = () => {
     ghosts.forEach(ghost => ghost.isScared = false)
   }
-
+  
   //GHOST CONTRSTRUCTOR
   class Ghost {
     constructor(className, startIndex, speed) {
@@ -177,24 +177,24 @@ document.addEventListener('DOMContentLoaded', () => {
       this.timerId = NaN
     }
   }
-
+  
   //CREATE GHOST
   ghosts = [
     new Ghost('blinky', 348, 500),
     new Ghost('pinky', 376, 450),
     new Ghost('inky', 351, 350),
     new Ghost('clyde', 379, 500)
-    ]
-
+  ]
+  
   //DRAW GHOST INTO THE BOARD
   ghosts.forEach(ghost => {
     squares[ghost.currentIndex].classList.add(ghost.className)
     squares[ghost.currentIndex].classList.add('ghost')
-    })
-
+  })
+  
   //MOVE GHOST
   ghosts.forEach(ghost => moveGhost(ghost))
-
+  
   function moveGhost(ghost) {
     const directions =  [-1, +1, width, -width]
     let direction = directions[Math.floor(Math.random() * directions.length)]
@@ -202,24 +202,24 @@ document.addEventListener('DOMContentLoaded', () => {
     ghost.timerId = setInterval(function() {
       //CHECK FOR WALL AND GHOST FOR NEXT MOVE
       if  (!squares[ghost.currentIndex + direction].classList.contains('ghost') &&
-        !squares[ghost.currentIndex + direction].classList.contains('wall') ) {
-
-          //REMOVE GHOST CLASS 
-          squares[ghost.currentIndex].classList.remove(ghost.className)
-          squares[ghost.currentIndex].classList.remove('ghost', 'scared-ghost')
-
-          //ADD GHOST CLASS IN NEW SQUARE
-          ghost.currentIndex += direction
-          squares[ghost.currentIndex].classList.add(ghost.className, 'ghost')
-
-      //IF WALL OR GHOST, FIND NEW DIRECTION
+      !squares[ghost.currentIndex + direction].classList.contains('wall') ) {
+        
+        //REMOVE GHOST CLASS 
+        squares[ghost.currentIndex].classList.remove(ghost.className)
+        squares[ghost.currentIndex].classList.remove('ghost', 'scared-ghost')
+        
+        //ADD GHOST CLASS IN NEW SQUARE
+        ghost.currentIndex += direction
+        squares[ghost.currentIndex].classList.add(ghost.className, 'ghost')
+        
+        //IF WALL OR GHOST, FIND NEW DIRECTION
       } else direction = directions[Math.floor(Math.random() * directions.length)]
-
+      
       //ADD SCARED CLASS
       if (ghost.isScared) {
         squares[ghost.currentIndex].classList.add('scared-ghost')
       }
-
+      
       //PAC-MAN EATS SCARED GHOST
       if(ghost.isScared && squares[ghost.currentIndex].classList.contains('pac-man')) {
         squares[ghost.currentIndex].classList.remove(ghost.className, 'ghost', 'scared-ghost')
@@ -227,22 +227,22 @@ document.addEventListener('DOMContentLoaded', () => {
         score +=100
         squares[ghost.currentIndex].classList.add(ghost.className, 'ghost')
       }
-
-    checkForGameOver()
+      
+      checkForGameOver()
     }, ghost.speed)
   }
-
+  
   //CHECK FOR A GAME OVER
   const checkForGameOver =() => {
     if (squares[pacmanCurrentIndex].classList.contains('ghost') &&
-      !squares[pacmanCurrentIndex].classList.contains('scared-ghost')) {
+    !squares[pacmanCurrentIndex].classList.contains('scared-ghost')) {
       gameOverAudio.play()
       ghosts.forEach(ghost => clearInterval(ghost.timerId))
       document.removeEventListener('keyup', movePacman)
       setTimeout(() => { alert("Game Over"), scoreData() }, 500)
     }
   }
-
+  
   //CHECK FOR WIN
   const checkForWin = () => {
     if (score === 274) {
@@ -253,21 +253,4 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 })
 
-const scoreObject = []
-const scoreData = () => {
-  let name = window.prompt('Name: ')
-  scoreObject.push({ name: name, score: score.firstChild.data }) 
-  sendScore()
-}
 
-const sendScore = async () => {
-  let data = JSON.stringify(scoreObject)
-  await fetch('http://localhost:7001/pacman/api/score', {
-    method: "POST",
-    body: data,
-    headers:
-    {
-      "Content-Type": "application/json"
-    },
-  })
-}
