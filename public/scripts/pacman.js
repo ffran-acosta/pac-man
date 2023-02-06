@@ -180,9 +180,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   //CREATE GHOST
   ghosts = [
-    new Ghost('blinky', 348, 250),
-    new Ghost('pinky', 376, 400),
-    new Ghost('inky', 351, 300),
+    new Ghost('blinky', 348, 500),
+    new Ghost('pinky', 376, 450),
+    new Ghost('inky', 351, 350),
     new Ghost('clyde', 379, 500)
     ]
 
@@ -200,30 +200,34 @@ document.addEventListener('DOMContentLoaded', () => {
     let direction = directions[Math.floor(Math.random() * directions.length)]
 
     ghost.timerId = setInterval(function() {
-      //if the next squre your ghost is going to go to does not have a ghost and does not have a wall
+      //CHECK FOR WALL AND GHOST FOR NEXT MOVE
       if  (!squares[ghost.currentIndex + direction].classList.contains('ghost') &&
         !squares[ghost.currentIndex + direction].classList.contains('wall') ) {
-          //remove the ghosts classes
+
+          //REMOVE GHOST CLASS 
           squares[ghost.currentIndex].classList.remove(ghost.className)
           squares[ghost.currentIndex].classList.remove('ghost', 'scared-ghost')
-          //move into that space
+
+          //ADD GHOST CLASS IN NEW SQUARE
           ghost.currentIndex += direction
           squares[ghost.currentIndex].classList.add(ghost.className, 'ghost')
-      //else find a new random direction ot go in
+
+      //IF WALL OR GHOST, FIND NEW DIRECTION
       } else direction = directions[Math.floor(Math.random() * directions.length)]
 
-      //if the ghost is currently scared
+      //ADD SCARED CLASS
       if (ghost.isScared) {
         squares[ghost.currentIndex].classList.add('scared-ghost')
       }
 
-      //if the ghost is currently scared and pacman is on it
+      //PAC-MAN EATS SCARED GHOST
       if(ghost.isScared && squares[ghost.currentIndex].classList.contains('pac-man')) {
         squares[ghost.currentIndex].classList.remove(ghost.className, 'ghost', 'scared-ghost')
         ghost.currentIndex = ghost.startIndex
         score +=100
         squares[ghost.currentIndex].classList.add(ghost.className, 'ghost')
       }
+      
     checkForGameOver()
     }, ghost.speed)
   }
