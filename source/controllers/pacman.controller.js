@@ -1,3 +1,5 @@
+const { all } = require("../models/scores.models")
+
 const controller = {
     home: (req, res) => {
         res.render("pacman-home")
@@ -6,7 +8,8 @@ const controller = {
         res.render("pacman-game")
     },
     score: (req, res) => {
-        res.render("pacman-score")
+        let scores = all()
+        return res.render('pacman-score', { scores })
     },
     exit: (req, res) => {
         res.redirect("http://localhost:7000/")

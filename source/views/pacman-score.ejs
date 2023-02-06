@@ -1,19 +1,26 @@
-<%- include('./partials/head.ejs')%> 
+<%- include('./partials/head.ejs') %>
 
-<body>
-    
-    <%- include("./partials/header.ejs")  %>
+    <body>
 
-    <h1>SCORES</h1>
+        <%- include("./partials/header.ejs") %>
 
-    <nav class="menu">
-        <ul>
-            <li class="submenu">asd</li>
-            <li class="submenu">asd</li>
-            <li class="submenu">asd</li>
-        </ul>
+            <main id="scoreMain">
 
-    <script src="/scripts/pacman.js"></script>
-    <script src="/scripts/buttons.js"></script>
-</body>
-</html>
+                <% if (scores.length > 0) { %>
+                    <table class="scoreTable">
+                        <tr class="scoreHead">
+                            <th>Name</th>
+                            <th>Score</th>
+                        </tr>
+                        <% scores.forEach(element=> { %>
+                            <%- include("./partials/score.ejs", {element:element}) %>
+                                <% }) %>
+                    </table>
+                    <% } else { %>
+                        <h2>NO HAY SCORES</h2>
+                        <% } %>
+
+            </main>
+    </body>
+
+    </html>

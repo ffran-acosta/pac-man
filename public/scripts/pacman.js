@@ -1,10 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
 
   //SOUNDS
-  let startAudio = new Audio('../sounds/start.mp3')
-  let wakaWakaAudio = new Audio('../sounds/waka-waka.mp3')
-  let powerPallet = new Audio('../sounds/power-pallet.mp3')
-  let gameOverAudio = new Audio('../sounds/game-over.mp3')
+  const startAudio = new Audio('../sounds/start.mp3')
+  const wakaWakaAudio = new Audio('../sounds/waka-waka.mp3')
+  const powerPallet = new Audio('../sounds/power-pallet.mp3')
+  const gameOverAudio = new Audio('../sounds/game-over.mp3')
   const mute = document.getElementById("mute")
   const volume = document.getElementById("volume")
   volume.addEventListener("click", () => {
@@ -227,7 +227,7 @@ document.addEventListener('DOMContentLoaded', () => {
         score +=100
         squares[ghost.currentIndex].classList.add(ghost.className, 'ghost')
       }
-      
+
     checkForGameOver()
     }, ghost.speed)
   }
@@ -239,7 +239,7 @@ document.addEventListener('DOMContentLoaded', () => {
       gameOverAudio.play()
       ghosts.forEach(ghost => clearInterval(ghost.timerId))
       document.removeEventListener('keyup', movePacman)
-      setTimeout(() => { alert("Game Over"); }, 500)
+      setTimeout(() => { alert("Game Over"), scoreData() }, 500)
     }
   }
 
@@ -248,7 +248,26 @@ document.addEventListener('DOMContentLoaded', () => {
     if (score === 274) {
       ghosts.forEach(ghost => clearInterval(ghost.timerId))
       document.removeEventListener('keyup', movePacman)
-      setTimeout(() => { alert("You have WON!"); }, 500)
+      setTimeout(() => { alert("You have WON!")}, 500)
     }
   }
 })
+
+const scoreObject = []
+const scoreData = () => {
+  let name = window.prompt('Name: ')
+  scoreObject.push({ name: name, score: score.firstChild.data }) 
+  sendScore()
+}
+
+const sendScore = async () => {
+  let data = JSON.stringify(scoreObject)
+  await fetch('http://localhost:7001/pacman/api/score', {
+    method: "POST",
+    body: data,
+    headers:
+    {
+      "Content-Type": "application/json"
+    },
+  })
+}
