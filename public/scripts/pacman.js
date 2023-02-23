@@ -266,7 +266,7 @@ const scoreData = () => {
 
 const sendScore = async () => {
   let data = JSON.stringify(scoreObject)
-  await fetch('http://localhost:7001/pacman/score/save', {
+  await fetch('https://pac-man.up.railway.app/pacman/score/save', {
     method: "POST",
     body: data,
     headers:
