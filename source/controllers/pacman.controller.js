@@ -16,17 +16,17 @@ const controller = {
             console.log(error);
         }
     },
-    // scoreSave: async (req, res) => {
-    //     const score = req.body
-    //     try {
-    //         const newScore = await pool.query('INSERT INTO pacman_score(name, score) VALUES($1, $2)', [score[0].name, score[0].score])
-    //         res.json(newScore)
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-    // },
+    scoreSave: async (req, res) => {
+        const score = req.body
+        try {
+            const newScore = await pool.query('INSERT INTO pacman_scores(name, score) VALUES($1, $2)', [score[0].name, score[0].score])
+            res.json(newScore)
+        } catch (error) {
+            console.log(error);
+        }
+    },
     exit: (req, res) => {
-        res.redirect("http://localhost:7000/")
+        res.redirect("https://ffran-acosta.up.railway.app/")
     }
 }
 
