@@ -6,8 +6,8 @@
 
 .logo img{
     display: flex;
-    width: 30%;
-    max-width: 200px;
+    width: 25%;
+    max-width: 150px;
     justify-content: center;
 }
 

@@ -1,7 +1,5 @@
 const volume = document.getElementById("volume")
 const mute = document.getElementById("mute")
-// const play = document.getElementById("play")
-// const pause = document.getElementById("pause")
 const restart = document.getElementById("restart")
 
 let startAudio = new Audio('../sounds/start.mp3')
@@ -22,14 +20,6 @@ volume.addEventListener("click", () => {
 mute.addEventListener("click", () => {
     changeButton(mute, volume)
 })
-
-// pause.addEventListener("click", () => {
-//     changeButton(pause, play)
-// })
-
-// play.addEventListener("click", () => {
-//     changeButton(play, pause)
-// })
 
 restart.addEventListener("click", () => {
     window.location.reload()

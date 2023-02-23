@@ -1,12 +1,16 @@
 document.addEventListener('DOMContentLoaded', () => {
 
   //SOUNDS
-  const startAudio = new Audio('../sounds/start.mp3')
+  const startAudio= new Audio('../sounds/start.mp3')
   const wakaWakaAudio = new Audio('../sounds/waka-waka.mp3')
   const powerPallet = new Audio('../sounds/power-pallet.mp3')
   const gameOverAudio = new Audio('../sounds/game-over.mp3')
   const mute = document.getElementById("mute")
   const volume = document.getElementById("volume")
+  startAudio.volume = .5
+  wakaWakaAudio.volume = .2
+  powerPallet.volume = .5
+  gameOverAudio.volume = .5
   volume.addEventListener("click", () => {
     startAudio.volume = 0
     wakaWakaAudio.volume = 0
@@ -14,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
     gameOverAudio.volume = 0
   })
   mute.addEventListener("click", () => {
-    startAudio.volume = 1
+    startAudio.volume = 0.2
     wakaWakaAudio.volume = 1
     powerPallet.volume = 1
     gameOverAudio.volume = 1
