@@ -22,4 +22,3 @@ server.use(statics(join(__dirname, "../public")));
 
 //ROUTES
 server.use('/pacman', (require('./routes/pacman.routes')))
-server.use('/pacman/api', (require('./routes/api/score.api.routes')))
