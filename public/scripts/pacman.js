@@ -27,6 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
   //SCORE
   const scoreDisplay = document.getElementById('score')
   let score = 0
+  let pacDotEatenCount = 0
   
   const grid = document.querySelector('.grid')
   const width = 28
@@ -44,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
     1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1,
     1,1,1,1,1,1,0,1,1,1,1,1,0,1,1,0,1,1,1,1,1,0,1,1,1,1,1,1,
     1,1,1,1,1,1,0,1,1,4,4,4,4,4,4,4,4,4,4,1,1,0,1,1,1,1,1,1,
-    1,1,1,1,1,1,0,1,1,4,1,1,1,2,2,1,1,1,4,1,1,0,1,1,1,1,1,1,
+    1,1,1,1,1,1,0,1,1,4,1,1,2,2,2,2,1,1,4,1,1,0,1,1,1,1,1,1,
     1,1,1,1,1,1,0,1,1,4,1,2,2,2,2,2,2,1,4,1,1,0,1,1,1,1,1,1,
     4,4,4,4,4,4,0,0,0,4,1,2,2,2,2,2,2,1,4,0,0,0,4,4,4,4,4,4,
     1,1,1,1,1,1,0,1,1,4,1,2,2,2,2,2,2,1,4,1,1,0,1,1,1,1,1,1,
@@ -147,6 +148,7 @@ document.addEventListener('DOMContentLoaded', () => {
   //EAT A PAC-DOT
   const pacDotEaten = () => {
     if (squares[pacmanCurrentIndex].classList.contains('pac-dot')) {
+      pacDotEatenCount++
       score++
       scoreDisplay.innerHTML = score
       squares[pacmanCurrentIndex].classList.remove('pac-dot')
@@ -184,10 +186,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   //CREATE GHOST
   ghosts = [
-    new Ghost('blinky', 348, 500),
-    new Ghost('pinky', 376, 450),
-    new Ghost('inky', 351, 350),
-    new Ghost('clyde', 379, 500)
+    new Ghost('blinky', 348, 200),
+    new Ghost('pinky', 376, 150),
+    new Ghost('inky', 351, 150),
+    new Ghost('clyde', 379, 200)
     ]
 
   //DRAW GHOST INTO THE BOARD
@@ -249,10 +251,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   //CHECK FOR WIN
   const checkForWin = () => {
-    if (score === 274) {
+    if (pacDotEatenCount === 234) {
       ghosts.forEach(ghost => clearInterval(ghost.timerId))
       document.removeEventListener('keyup', movePacman)
-      setTimeout(() => { alert("You have WON!")}, 500)
+      setTimeout(() => { alert("You have WON!"), scoreData() }, 500)
     }
   }
 })
